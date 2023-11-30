@@ -1,11 +1,18 @@
-// Fixed thanks to Jacob DeMaris on the general discussions
-
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const tripsController = require('../controllers/trips');
 
-router.route('/trips').get(tripsController.triplist);
+const tripsController = require("../controllers/trips");
 
-router.route('/trips/:tripCode').get(tripsController.tripsFindByCode);
+router
+  .route("/trips")
+  .get(tripsController.tripsList)
+  .post(tripsController.tripsAddTrip);
+
+router
+  .route("/trips/:tripCode")
+  .get(tripsController.tripsList)
+  .put(tripsController.tripsUpdateTrip);
+
+router.route("/trips/:tripCode").get(tripsController.tripsFindCode);
 
 module.exports = router;
