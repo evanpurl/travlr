@@ -26,7 +26,7 @@ export class EditTripComponent implements OnInit {
       this.router.navigate([""]);
       return;
     }
-
+    console.log("EditTripComponent#onInit found tripCode " + tripCode);
     // initialize form
     this.editForm = this.formBuilder.group({
       _id: [],
@@ -40,7 +40,9 @@ export class EditTripComponent implements OnInit {
       description: ["", Validators.required],
     });
     console.log(
-      "EditTripComponent#onInit calling TripDataService#getTrip('" + tripCode + "')"
+      "EditTripComponent#onInit calling TripDataService#getTrip('" +
+        tripCode +
+        "')"
     );
 
     this.tripService.getTrip(tripCode).then((data) => {
@@ -57,5 +59,9 @@ export class EditTripComponent implements OnInit {
         this.router.navigate([""]);
       });
     }
+  }
+  // get the form short name to access the form fields
+  get f() {
+    return this.editForm.controls;
   }
 }
